@@ -7,7 +7,7 @@ export default (async (url='http://m:8000/list?size=1/', port=9222, timeout=2000
       "/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome",
       '--headless',
       '--remote-debugging-port='+port,
-        '--crash-dumps-dir=/tmp',
+        '--crash-dumps-dir=/tmp/chrome-crash',
       url,
     ],
     stdout: 'piped',

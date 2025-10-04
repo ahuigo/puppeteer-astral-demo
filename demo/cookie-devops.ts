@@ -1,6 +1,6 @@
 import { Cookie, Page } from "$puppeteer";
-import { runBrowser } from "./demo/browser.ts";
-import { getArgs, gitLastGitLog, sleep } from "./deps.ts";
+import { getPageBrowser} from "../lib/browser.ts";
+import { getArgs, gitLastGitLog, sleep } from "../deps.ts";
 interface Args {
   repo: string;
   from: string;
@@ -127,19 +127,18 @@ async function main() {
     return;
   }
 
-  await runBrowser(async (page) => {
+  const [page, _] = await getPageBrowser({
+    headless: false,
+    executablePath: "/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome",
+    args: ["--start-maximized", "--no-sandbox"],
+    // '--start-maximized' // you can also use '--start-fullscreen'
+  });
     //1. login
     await getLoginPage(args, page);
     //window.page = page
     //2. goto pull request
     await gotoPullRequest(page, args);
     //3. creat request
-  }, {
-    headless: false,
-    executablePath: "/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome",
-    args: ["--start-maximized", "--no-sandbox"],
-    // '--start-maximized' // you can also use '--start-fullscreen'
-  });
 
 }
 

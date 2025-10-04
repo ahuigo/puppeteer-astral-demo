@@ -17,6 +17,7 @@
   "lock": false,
   "unstable": ["worker-options"],
   "imports": {
+  "$/": "./",
   "$std/": "https://deno.land/std@0.208.0/",
   "$puppeteer2": "jsr:@astral/astral",
   "$puppeteer": "../astral/mod.ts",
